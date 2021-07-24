@@ -1,5 +1,6 @@
 package com.xyc.springcloudlearninga.controller;
 
+import com.xyc.springcloudlearninga.config.MyConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -23,6 +24,9 @@ public class HelloController {
     @Value("${server.port}")
     private String port;
 
+    @Autowired
+    private MyConfig myConfig;
+
     @GetMapping("/hello")
     public String hello() {
 //        return "hello";
@@ -33,5 +37,10 @@ public class HelloController {
     @GetMapping("/hello-value")
     public String helloValue() {
         return port;
+    }
+
+    @GetMapping("/hello-myconfig")
+    public String helloConfig() {
+        return myConfig.getName();
     }
 }
